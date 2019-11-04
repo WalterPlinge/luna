@@ -16,33 +16,22 @@ Timer
 public:
 
 	Timer(
-		) :
-		start(clock::now())
-	{}
+		);
 
 	auto
 	reset(
 		)
-		-> void
-	{
-		start = clock::now();
-	}
+		-> void;
 
 	auto
 	elapsed(
 		) const
-		-> std::chrono::duration<float>
-	{
-		return clock::now() - start;
-	}
+		-> std::chrono::duration<float>;
 
 	auto
 	elapsed_seconds(
 		) const
-		-> float
-	{
-		return elapsed().count();
-	}
+		-> float;
 };
 
 } // namespace luna
