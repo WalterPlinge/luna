@@ -24,8 +24,3 @@ target_compile_features(${PROJECT_NAME}
 	INTERFACE
 		cxx_std_17
 )
-
-target_link_options(${PROJECT_NAME}
-	INTERFACE
-		cxx_std_17
-)
