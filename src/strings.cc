@@ -4,6 +4,8 @@
 
 using namespace std;
 
+
+
 namespace luna
 {
 
@@ -14,24 +16,25 @@ split_string(
 	)
 	-> vector<string_view>
 {
-	auto token_count = 0U;
-	for (auto const c : string)
-		if (delim(c))
-			++token_count;
-	auto tokens = vector<string_view>();
+	auto token_count = count_if(string.begin(), string.end(), delim) + 1;
+	auto tokens      = vector<string_view>{};
 	tokens.reserve(token_count);
-	for (auto a = 0UL, b = a; b < string.size(); ++b)
+	for (auto a = size_t{0}, b = a; b <= string.size(); ++b)
 	{
-		if (delim(string[b]))
+		if (b == string.size() || delim(string[b]))
 		{
-			if (a < b)
+			if (b > a)
+			{
 				tokens.push_back(string.substr(a, b - a));
+			}
 			a = b + 1;
 		}
 	}
 	tokens.shrink_to_fit();
 	return tokens;
 }
+
+
 
 auto
 split_string(
@@ -47,21 +50,9 @@ split_string(
 	{
 		return c == delim;
 	});
-
-	/* LEGACY CODE (stays because it's neat)
-	// Count delims
-	auto s      = string;
-	auto tokens = vector<string_view>();
-	tokens.reserve(count(s.begin(), s.end(), delim) + 1);
-
-	// Find tokens
-	for (auto i = 0UL; (i = s.find(delim)) != s.npos; s = s.substr(i + 1))
-		if (i && !s.empty())
-			tokens.push_back(s.substr(0, i));
-	tokens.shrink_to_fit();
-	return tokens;
-	*/
 }
+
+
 
 auto
 split_string(
@@ -72,21 +63,31 @@ split_string(
 {
 	// Count delims
 	auto s           = string;
-	auto token_count = 0U;
-	for (auto i = 0UL; (i = s.find(delim)) != s.npos; s = s.substr(i + delim.size()))
-		if (i && !s.empty())
+	auto token_count = size_t{1};
+	for (auto i = size_t{0}; !s.empty(); s = s.substr(i == s.npos ? s.size() : i + delim.size()))
+	{
+		if ((i = s.find(delim)))
+		{
 			++token_count;
+		}
+	}
 
 	// Find tokens
 	s           = string;
-	auto tokens = vector<string_view>();
-	tokens.reserve(token_count + 1);
-	for (auto i = 0ULL; (i = s.find(delim)) != s.npos; s = s.substr(i + delim.size()))
-		if (i && !s.empty())
+	auto tokens = vector<string_view>{};
+	tokens.reserve(token_count);
+	for (auto i = size_t{0}; !s.empty(); s = s.substr(i == s.npos ? s.size() : i + delim.size()))
+	{
+		if ((i = s.find(delim)))
+		{
 			tokens.push_back(s.substr(0, i));
+		}
+	}
 	tokens.shrink_to_fit();
 	return tokens;
 }
+
+
 
 auto
 split_string_chars(
@@ -96,42 +97,12 @@ split_string_chars(
 	-> vector<string_view>
 {
 	return split_string(string, [delims](
-		char const& c
+		char c
 		)
 		-> bool
 	{
-		return delims.find(c) != delims.npos;
+			return delims.find(c) != delims.npos;
 	});
-
-	/* LEGACY CODE (you can't tell me it's not neat)
-	// Return the closest delim
-	auto const static min_find = [delims](
-		string_view const& s
-		)
-		-> size_t
-	{
-		auto l = s.npos;
-		for (auto const c : delims)
-			if (auto f = s.find(c); f < l)
-				l = f;
-		return l;
-	};
-
-	// Count delims
-	auto token_count = 0UL;
-	for (auto const c : delims)
-		token_count += count(string.begin(), string.end(), c);
-
-	// Find tokens
-	auto s = string;
-	auto tokens = vector<string_view>();
-	tokens.reserve(token_count + 1);
-	for (auto pos = 0ULL; (pos = min_find(s)) != s.npos; s = s.substr(pos + 1))
-		if (pos && !s.empty())
-			tokens.push_back(s.substr(0, pos));
-	tokens.shrink_to_fit();
-	return tokens;
-	*/
 }
 
 } // namespace luna
