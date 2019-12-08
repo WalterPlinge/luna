@@ -17,7 +17,7 @@ split_string(
 	-> vector<string_view>
 {
 	auto token_count = count_if(string.begin(), string.end(), delim) + 1;
-	auto tokens      = vector<string_view>{};
+	auto tokens      = vector<string_view>();
 	tokens.reserve(token_count);
 	for (auto a = size_t{0}, b = a; b <= string.size(); ++b)
 	{
@@ -74,7 +74,7 @@ split_string(
 
 	// Find tokens
 	s           = string;
-	auto tokens = vector<string_view>{};
+	auto tokens = vector<string_view>();
 	tokens.reserve(token_count);
 	for (auto i = size_t{0}; !s.empty(); s = s.substr(i == s.npos ? s.size() : i + delim.size()))
 	{
