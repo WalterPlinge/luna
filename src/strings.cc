@@ -16,10 +16,21 @@ split_string(
 	)
 	-> vector<string_view>
 {
-	auto token_count = count_if(string.begin(), string.end(), delim) + 1;
-	auto tokens      = vector<string_view>();
+	auto token_count = 0ULL;
+	for (auto a = 0ULL, b = a; b <= string.size(); ++b)
+	{
+		if (b == string.size() || delim(string[b]))
+		{
+			if (b > a)
+			{
+				++token_count;
+			}
+			a = b + 1;
+		}
+	}
+	auto tokens = vector<string_view>();
 	tokens.reserve(token_count);
-	for (auto a = size_t{0}, b = a; b <= string.size(); ++b)
+	for (auto a = 0ULL, b = a; b <= string.size(); ++b)
 	{
 		if (b == string.size() || delim(string[b]))
 		{
@@ -44,7 +55,7 @@ split_string(
 	-> vector<string_view>
 {
 	return split_string(string, [delim](
-		char const& c
+		char const c
 		)
 		-> bool
 	{
@@ -63,8 +74,8 @@ split_string(
 {
 	// Count delims
 	auto s           = string;
-	auto token_count = size_t{1};
-	for (auto i = size_t{0}; !s.empty(); s = s.substr(i == s.npos ? s.size() : i + delim.size()))
+	auto token_count = 0ULL;
+	for (auto i = 0ULL; !s.empty(); s = s.substr(i == s.npos ? s.size() : i + delim.size()))
 	{
 		if ((i = s.find(delim)))
 		{
@@ -76,7 +87,7 @@ split_string(
 	s           = string;
 	auto tokens = vector<string_view>();
 	tokens.reserve(token_count);
-	for (auto i = size_t{0}; !s.empty(); s = s.substr(i == s.npos ? s.size() : i + delim.size()))
+	for (auto i = 0ULL; !s.empty(); s = s.substr(i == s.npos ? s.size() : i + delim.size()))
 	{
 		if ((i = s.find(delim)))
 		{
@@ -96,12 +107,12 @@ split_string_chars(
 	)
 	-> vector<string_view>
 {
-	return split_string(string, [delims](
-		char c
+	return split_string(string, [&delims](
+		char const c
 		)
 		-> bool
 	{
-			return delims.find(c) != delims.npos;
+		return delims.find(c) != delims.npos;
 	});
 }
 
