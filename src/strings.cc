@@ -77,7 +77,7 @@ split_string(
 	auto token_count = 0ULL;
 	for (auto i = 0ULL; !s.empty(); s = s.substr(i == s.npos ? s.size() : i + delim.size()))
 	{
-		if ((i = s.find(delim)))
+		if ((i = s.find(delim)) > 0ULL)
 		{
 			++token_count;
 		}
@@ -89,7 +89,7 @@ split_string(
 	tokens.reserve(token_count);
 	for (auto i = 0ULL; !s.empty(); s = s.substr(i == s.npos ? s.size() : i + delim.size()))
 	{
-		if ((i = s.find(delim)))
+		if ((i = s.find(delim)) > 0ULL)
 		{
 			tokens.push_back(s.substr(0, i));
 		}
