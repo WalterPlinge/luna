@@ -3,6 +3,7 @@ set(HEADER_FILES
 	${INCLUDE_DIR}/files.hh
 	${INCLUDE_DIR}/strings.hh
 	${INCLUDE_DIR}/timer.hh
+	${INCLUDE_DIR}/types.hh
 )
 set(SOURCE_FILES
 	files.cc
