@@ -95,31 +95,31 @@ using Char =
 namespace luna::types::literals
 {
 
-Bool  operator "" _bool (UInt);
-Byte  operator "" _byte (UInt);
-Int   operator "" _int  (UInt);
-UInt  operator "" _uint (UInt);
-Size  operator "" _size (UInt);
-Ptr   operator "" _ptr  (UInt);
-Float operator "" _float(long double);
+inline Bool  operator "" _bool (UInt        x) { return Bool (x); }
+inline Byte  operator "" _byte (UInt        x) { return Byte (x); }
+inline Int   operator "" _int  (UInt        x) { return Int  (x); }
+inline UInt  operator "" _uint (UInt        x) { return UInt (x); }
+inline Size  operator "" _size (UInt        x) { return Size (x); }
+inline Ptr   operator "" _ptr  (UInt        x) { return Ptr  (x); }
+inline Float operator "" _float(long double x) { return Float(x); }
 
 
 
 #if defined LUNA_SIZED_TYPES || defined LUNA_FAST_TYPES || defined LUNA_LEAST_TYPES
 
-	f32 operator "" _f32(long double);
-	f64 operator "" _f64(long double);
-	f80 operator "" _f80(long double);
+	inline f32 operator "" _f32(long double x) { return f32(x); };
+	inline f64 operator "" _f64(long double x) { return f64(x); };
+	inline f80 operator "" _f80(long double x) { return f80(x); };
 
-	i8  operator "" _i8 (UInt);
-	i16 operator "" _i16(UInt);
-	i32 operator "" _i32(UInt);
-	i64 operator "" _i64(UInt);
+	i8  operator "" _i8 (UInt x) { return i8 (x); };
+	i16 operator "" _i16(UInt x) { return i16(x); };
+	i32 operator "" _i32(UInt x) { return i32(x); };
+	i64 operator "" _i64(UInt x) { return i64(x); };
 
-	u8  operator "" _u8 (UInt);
-	u16 operator "" _u16(UInt);
-	u32 operator "" _u32(UInt);
-	u64 operator "" _u64(UInt);
+	u8  operator "" _u8 (UInt x) { return u8 (x); };
+	u16 operator "" _u16(UInt x) { return u16(x); };
+	u32 operator "" _u32(UInt x) { return u32(x); };
+	u64 operator "" _u64(UInt x) { return u64(x); };
 
 #endif
 
