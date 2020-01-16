@@ -111,15 +111,15 @@ inline Float operator "" _float(long double x) { return Float(x); }
 	inline f64 operator "" _f64(long double x) { return f64(x); };
 	inline f80 operator "" _f80(long double x) { return f80(x); };
 
-	i8  operator "" _i8 (UInt x) { return i8 (x); };
-	i16 operator "" _i16(UInt x) { return i16(x); };
-	i32 operator "" _i32(UInt x) { return i32(x); };
-	i64 operator "" _i64(UInt x) { return i64(x); };
+	inline i8  operator "" _i8 (UInt x) { return i8 (x); };
+	inline i16 operator "" _i16(UInt x) { return i16(x); };
+	inline i32 operator "" _i32(UInt x) { return i32(x); };
+	inline i64 operator "" _i64(UInt x) { return i64(x); };
 
-	u8  operator "" _u8 (UInt x) { return u8 (x); };
-	u16 operator "" _u16(UInt x) { return u16(x); };
-	u32 operator "" _u32(UInt x) { return u32(x); };
-	u64 operator "" _u64(UInt x) { return u64(x); };
+	inline u8  operator "" _u8 (UInt x) { return u8 (x); };
+	inline u16 operator "" _u16(UInt x) { return u16(x); };
+	inline u32 operator "" _u32(UInt x) { return u32(x); };
+	inline u64 operator "" _u64(UInt x) { return u64(x); };
 
 #endif
 
