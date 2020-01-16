@@ -105,7 +105,7 @@ Float operator "" _float(long double);
 
 
 
-#if defined LUNA_SIZED_TYPES
+#if defined LUNA_SIZED_TYPES || defined LUNA_FAST_TYPES || defined LUNA_LEAST_TYPES
 
 	f32 operator "" _f32(long double);
 	f64 operator "" _f64(long double);
