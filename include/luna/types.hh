@@ -14,7 +14,7 @@
 
 
 
-namespace luna
+namespace luna::types
 {
 
 using Bool  = bool;
@@ -73,11 +73,11 @@ using Ptr   = std::ptrdiff_t;
 
 #endif
 
-} // namespace luna
+} // namespace luna::types
 
 
 
-namespace luna::type_literals
+namespace luna::types::literals
 {
 
 Bool  operator "" _bool (UInt);
